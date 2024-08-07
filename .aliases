@@ -1,0 +1,44 @@
+# echo Brunoss dafault configuration loaded.
+
+# to add in .bashrc and .zshrc
+# to load default alises
+#[[ ! -f ~/.aliases ]] || source ~/.aliases
+
+
+# aliases to use with ls and exa
+alias ls='exa --git'
+alias la='exa -a'
+alias ll='exa -l --group-directories-first --git'
+alias lla='exa -la --group-directories-first --git'
+alias lt='exa -T --git-ignore --group-directories-first'
+alias lte='exa -T --git-ignore -I "*env|__pycache__" --group-directories-first'
+alias ltd='exa -TD --git-ignore'
+alias lr='exa -ls modified --git'
+
+# alises to grep and ripgrep
+alias grep='grep --color=auto'
+
+# aliases to switch terminals
+alias z='zsh'
+alias b='bash'
+
+# alias to show all alias from this file:
+alias aliasb='rg -e ^alias ~/.aliases -N'
+
+# aliases to see this file with cat or bat
+alias aa='bat ~/.bruno_aliases'
+
+# alias to virtual enviroment
+alias ac='source ./env/bin/activate'
+alias dea='deactivate'
+
+# git alias
+alias glg='git log --graph --all --oneline'
+
+# installed programs
+# bat
+# grex
+# exa
+# dust
+# rg
+# fd
