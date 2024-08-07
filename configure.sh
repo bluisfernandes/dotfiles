@@ -3,8 +3,8 @@
 # Code snippet to be added
 code='
 # Start of added section
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
 # End of added section'
 
