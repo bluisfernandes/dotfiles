@@ -56,6 +56,7 @@ function install_cargo_packages {
             echo -e "${GREEN}$package${NC} installed successfully."
         else
             echo -e "${RED}Failed to install $package${NC}."
+            fail+=("$package - cargo")
         fi
     done
 }
@@ -65,7 +66,25 @@ function install_apt_packages {
     for package in "${to_install_apt_packages[@]}"; do
         echo -e "${YELLOW}Installing $package via apt...${NC}"
         sudo apt install -y "$package"
+        if command -v "$package" >/dev/null 2>&1; then
+            echo -e "${GREEN}$package${NC} installed successfully."
+        else
+            echo -e "${RED}Failed to install $package${NC}."
+            fail+=("$package - apt")
+        fi
     done
+}
+
+# Function to display packages that failed to install
+function display_packages_summary {
+    if [ ${#fail[@]} -gt 0 ]; then
+        echo -e "${RED}The following packages failed to install:${NC}"
+        for package in "${fail[@]}"; do
+            echo "- ${package}"
+        done
+    else
+        echo -e "${GREEN}All specified packages were installed successfully.${NC}"
+    fi
 }
 
 # Define the list of packages to install via apt
@@ -89,6 +108,7 @@ already_installed_apt_packages=()
 already_installed_cargo_packages=()
 to_install_apt_packages=()
 to_install_cargo_packages=()
+fail=()
 
 # Main script execution
 check_installed_packages
@@ -105,4 +125,6 @@ fi
 install_cargo_packages
 install_apt_packages
 
-echo -e "${GREEN}All specified packages have been installed.${NC}"
+# Display installation results
+display_packages_summary
+
