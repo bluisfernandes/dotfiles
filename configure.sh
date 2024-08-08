@@ -1,6 +1,19 @@
 #!/bin/bash
 
-# Code snippet to be added
+# Creates a symlink to .aliases
+if [ ! -f ~/.aliases ]; then
+    echo "creating symlink to .aliases"
+    ln -sf $(pwd)/.aliases ~/.aliases
+fi
+
+
+# List of files where we want to add the code (in the current directory)
+files=(
+    "$HOME/.bashrc"
+    "$HOME/.zshrc"
+    )
+
+# Code snippet to be added in files
 code='
 # Start of added section
 if [ -f ~/.aliases ]; then
@@ -8,12 +21,7 @@ if [ -f ~/.aliases ]; then
 fi
 # End of added section'
 
-# List of files where we want to add the code (in the current directory)
-files=(
-    "./.bashrc"
-    "./.zshrc"
-    # Add other files here if necessary
-)
+
 
 # Function to add the code to a file if not already present
 add_code_to_file() {
@@ -23,7 +31,7 @@ add_code_to_file() {
     # Check if the file exists
     if [ -f "$file" ]; then
         # Check if the code is already present in the file
-        if ! grep -qF "$code" "$file"; then
+        if ! grep -qF "~/.aliases" "$file"; then
             echo "Adding code to $file"
             echo "$code" >> "$file"
         else
@@ -31,7 +39,11 @@ add_code_to_file() {
         fi
     else
         echo "File $file not found. Creating and adding code."
-        echo "$code" > "$file"
+        if ! echo "$code" > "$file"; then
+            echo "Failed to create or write to $file"
+            exit 1
+        fi
+
     fi
 }
 
@@ -39,5 +51,3 @@ add_code_to_file() {
 for file in "${files[@]}"; do
     add_code_to_file "$file" "$code"
 done
-
-echo "Operation completed."
