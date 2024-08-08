@@ -8,6 +8,8 @@ This repository contains the configuration files and scripts to set up the envir
   - Git: `sudo apt install git`
   - zsh: `sudo apt install zsh`
   - Oh my zsh: [Oh My Zsh](https://ohmyz.sh/#install)
+  - Cargo: `curl https://sh.rustup.rs -sSf | sh`
+
 
 
 ## Installation
