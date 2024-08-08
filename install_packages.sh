@@ -1,86 +1,108 @@
 #!/bin/bash
 
-# Array of package names
-packages=(
+# Define color codes
+YELLOW='\033[0;33m'  # Yellow
+RED='\033[0;31m'     # Red
+GREEN='\033[0;32m'   # Green
+NC='\033[0m'         # No Color (reset to default)
+
+# Function to display installed and to-be-installed packages
+function display_packages {
+    echo -e "${YELLOW}The following packages are already installed:${NC}"
+    for package in "${already_installed_apt_packages[@]}"; do
+        echo "- ${package}"
+    done
+    for package in "${already_installed_cargo_packages[@]}"; do
+        echo "- ${package} (via Cargo)"
+    done
+    
+    echo -e "${YELLOW}The following packages will be installed:${NC}"
+    for package in "${to_install_apt_packages[@]}"; do
+        echo "- ${package} (via apt)"
+    done
+    for package in "${to_install_cargo_packages[@]}"; do
+        echo "- ${package} (via Cargo)"
+    done
+    echo ""
+}
+
+# Function to check installed packages
+function check_installed_packages {
+    # Check installed apt packages
+    for package in "${apt_packages[@]}"; do
+        if dpkg -l | grep -q "^ii  $package "; then
+            already_installed_apt_packages+=("$package")
+        else
+            to_install_apt_packages+=("$package")
+        fi
+    done
+
+    # Check installed Cargo packages
+    for package in "${cargo_packages[@]}"; do
+        if command -v "$package" >/dev/null 2>&1; then
+            already_installed_cargo_packages+=("$package")
+        else
+            to_install_cargo_packages+=("$package")
+        fi
+    done
+}
+
+# Function to install Cargo packages
+function install_cargo_packages {
+    for package in "${to_install_cargo_packages[@]}"; do
+        echo -e "${YELLOW}Installing $package via Cargo...${NC}"
+        cargo install "$package"
+        if command -v "$package" >/dev/null 2>&1; then
+            echo -e "${GREEN}$package${NC} installed successfully."
+        else
+            echo -e "${RED}Failed to install $package${NC}."
+        fi
+    done
+}
+
+# Function to install apt packages
+function install_apt_packages {
+    for package in "${to_install_apt_packages[@]}"; do
+        echo -e "${YELLOW}Installing $package via apt...${NC}"
+        sudo apt install -y "$package"
+    done
+}
+
+# Define the list of packages to install via apt
+apt_packages=(
     "zsh"
     "bat"
-    #"grex"
-    "exa"
-    #"dust"
     "ripgrep"  # 'rg' is installed as 'ripgrep'
     "fd-find"  # 'fd' is installed as 'fd-find'
     "neofetch"
 )
 
-# Function to check which packages are already installed
-check_installed_packages() {
-    installed=()
-    not_installed=()
+# Define packages to be installed via Cargo
+cargo_packages=(
+    "exa"
+    "grex"
+    "dust"
+)
 
-    for package in "${packages[@]}"; do
-        if dpkg -l | grep -q "^ii  $package"; then
-            installed+=("$package")
-        else
-            not_installed+=("$package")
-        fi
-    done
-
-    # Display the packages that are already installed
-    if [ ${#installed[@]} -gt 0 ]; then
-        echo "The following packages are already installed:"
-        for package in "${installed[@]}"; do
-            echo -e "  - \e[32m$package\e[0m"  # Green color for installed packages
-        done
-    else
-        echo "No packages are already installed."
-    fi
-
-    # Display the packages that will be installed
-    if [ ${#not_installed[@]} -gt 0 ]; then
-        echo "The following packages will be installed:"
-        for package in "${not_installed[@]}"; do
-            echo -e "  - \e[33m$package\e[0m"  # Yellow color for packages to be installed
-        done
-    else
-        echo "All specified packages are already installed. Nothing to do."
-    fi
-}
-
-# Function to display the packages to be installed and ask for confirmation
-ask_for_confirmation() {
-    check_installed_packages
-
-    if [ ${#not_installed[@]} -eq 0 ]; then
-        return 1  # Exit if no packages need to be installed
-    fi
-
-    read -p "Do you want to proceed with the installation? (y/n): " answer
-    case $answer in
-        [Yy]* )
-            return 0
-            ;;
-        [Nn]* )
-            echo "Installation cancelled."
-            return 1
-            ;;
-        * )
-            echo "Invalid response. Please enter 'y' or 'n'."
-            return 2
-            ;;
-    esac
-}
-
-# Function to install packages
-install_packages() {
-    echo "Starting installation..."
-    for package in "${not_installed[@]}"; do
-        echo -e "⬇️  Installing \e[33m$package\e[0m..."
-        #sudo apt install "$package"
-    done
-    echo "Installation complete."
-}
+# Arrays to keep track of installed and to-be-installed packages
+already_installed_apt_packages=()
+already_installed_cargo_packages=()
+to_install_apt_packages=()
+to_install_cargo_packages=()
 
 # Main script execution
-if ask_for_confirmation; then
-    install_packages
+check_installed_packages
+display_packages
+
+# Ask for confirmation to proceed
+read -p "Do you want to proceed? (y/n): " choice
+if [[ "$choice" != "y" ]]; then
+    echo "Installation aborted."
+    exit 1
 fi
+
+# Install the packages
+install_cargo_packages
+install_apt_packages
+
+echo -e "${GREEN}All specified packages have been installed.${NC}"
