@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Define packages to be installed via APT or Cargo
+apt_packages=(
+    "zsh"
+    "bat"
+    "ripgrep"  # 'rg' is installed as 'ripgrep'
+    "fd-find"  # 'fd' is installed as 'fd-find'
+    "neofetch"
+)
+cargo_packages=(
+    "exa"
+    "grex"
+    "dust"
+)
+
 # Define color codes
 YELLOW='\033[0;33m'  # Yellow
 RED='\033[0;31m'     # Red
@@ -86,22 +100,6 @@ function display_packages_summary {
         echo -e "${GREEN}All specified packages were installed successfully.${NC}"
     fi
 }
-
-# Define the list of packages to install via apt
-apt_packages=(
-    "zsh"
-    "bat"
-    "ripgrep"  # 'rg' is installed as 'ripgrep'
-    "fd-find"  # 'fd' is installed as 'fd-find'
-    "neofetch"
-)
-
-# Define packages to be installed via Cargo
-cargo_packages=(
-    "exa"
-    "grex"
-    "dust"
-)
 
 # Arrays to keep track of installed and to-be-installed packages
 already_installed_apt_packages=()
