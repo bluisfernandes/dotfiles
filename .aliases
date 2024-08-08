@@ -1,19 +1,21 @@
-# echo Brunoss dafault configuration loaded.
-
-# to add in .bashrc and .zshrc
-# to load default alises
-#[[ ! -f ~/.aliases ]] || source ~/.aliases
-
-
-# aliases to use with ls and exa
-alias ls='exa --git'
-alias la='exa -a'
-alias ll='exa -l --group-directories-first --git'
-alias lla='exa -la --group-directories-first --git'
-alias lt='exa -T --git-ignore --group-directories-first'
-alias lte='exa -T --git-ignore -I "*env|__pycache__" --group-directories-first'
-alias ltd='exa -TD --git-ignore'
-alias lr='exa -ls modified --git'
+# Check if `exa` is installed
+if command -v exa >/dev/null 2>&1; then
+    # Aliases for `exa` (a modern replacement for `ls`)
+    alias ls='exa --git'                             # List files with Git information
+    alias la='exa -a'                               # List all files including hidden
+    alias ll='exa -l --group-directories-first --git' # Long format, directories first, Git info
+    alias lla='exa -la --group-directories-first --git' # Long format with hidden files, directories first, Git info
+    alias lt='exa -T --git-ignore --group-directories-first' # Tree view with Git ignore, directories first
+    alias lte='exa -T --git-ignore -I "*env|__pycache__" --group-directories-first' # Tree view with Git ignore, excluding env and __pycache__
+    alias ltd='exa -TD --git-ignore'                # Tree view with Git ignore, directories first, no color
+    alias lr='exa -ls modified --git'               # List modified files with Git info
+else
+    # Define color codes
+    YELLOW='\033[0;33m'  # Yellow
+    RED='\033[0;31m'     # Red
+    NC='\033[0m'         # No Color
+    echo -e "package '${YELLOW}exa${NC}' not found. ${RED}No 'ls' aliases created${NC}."
+fi
 
 # alises to grep and ripgrep
 alias grep='grep --color=auto'
@@ -32,13 +34,7 @@ alias aa='bat ~/.bruno_aliases'
 alias ac='source ./env/bin/activate'
 alias dea='deactivate'
 
-# git alias
+# Git alias for a graphical log view
 alias glg='git log --graph --all --oneline'
 
-# installed programs
-# bat
-# grex
-# exa
-# dust
-# rg
-# fd
+echo "Bruno's dafault configuration loaded. ✓"
