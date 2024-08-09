@@ -36,5 +36,3 @@ alias dea='deactivate'
 
 # Git alias for a graphical log view
 alias glg='git log --graph --all --oneline'
-
-echo "Bruno's dafault configuration loaded. ✓"
