@@ -27,3 +27,9 @@ To set up your environment, follow these steps:
 
 3. **Install themes and scripts:**
 `./configure.sh`
+
+## Plugins
+- Oh my zsh
+  - **zsh-autosuggestions**: `git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions` and add 'zsh-autosuggestions' to the list of plugins inside `~/.zshrc`
+  - **zsh-syntax-highlighting**: `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` and add 'zsh-syntax-highlighting' to the list of plugins inside `~/.zshrc`
+
