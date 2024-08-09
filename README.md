@@ -19,8 +19,8 @@ To set up your environment, follow these steps:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/bluisfernandes/dotfiles.git ~/dotfiles
-   cd ~/dotfiles
+   git clone https://github.com/bluisfernandes/dotfiles.git ~/.dotfiles
+   cd ~/.dotfiles
    ```
 2. **Install packages:**
 `./install_packages.sh`
