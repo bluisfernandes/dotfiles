@@ -74,3 +74,23 @@ add_code_to_file() {
 for file in "${files[@]}"; do
     add_code_to_file "$file" "$code"
 done
+
+
+# Check the current default shell
+current_shell=$(echo $SHELL)
+
+# Check the path to zsh
+zsh_path=$(which zsh)
+
+# Compare current shell with zsh
+if [ "$current_shell" != "$zsh_path" ]; then
+    echo "Changing the default shell to zsh..."
+    chsh -s "$zsh_path"
+    
+    # Verify if the change was successful
+    if [ $? -eq 0 ]; then
+        echo "Default shell successfully changed to zsh. Please log out and log back in."
+    else
+        echo "Failed to change the default shell."
+    fi
+fi
