@@ -3,7 +3,6 @@
 # Define packages to be installed via APT or Cargo
 apt_packages=(
     "zsh"
-    "bat"
     "ripgrep"  # 'rg' is installed as 'ripgrep'
     "fd-find"  # 'fd' is installed as 'fd-find'
     "neofetch"
@@ -12,6 +11,7 @@ cargo_packages=(
     "exa"
     "grex"
     "dust"
+    "bat"
 )
 
 # Define color codes
