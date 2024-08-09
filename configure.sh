@@ -1,10 +1,20 @@
 #!/bin/bash
 
-# Creates a symlink to .aliases
-if [ ! -f ~/.aliases ]; then
-    echo "creating symlink to .aliases..."
-    ln -sf $(pwd)/.aliases ~/.aliases
-fi
+# Files to be symlinked
+files=(".zshrc" ".aliases" ".tmux.conf" ".p10k.zsh")
+
+# Function to create a symlink with backup
+create_symlink() {
+    local src_dir="$1"
+    local file="$2"
+
+    if [ -f ~/$file ]; then
+        cp $src_dir/$file ~/$file.bak
+        echo -e "$file backup created in ${YELLOW}~/$file.bak${NC}"
+    fi
+    echo "creating symlink to $file..." 
+    ln -sf $src_dir/$file ~/$file
+}
 
 # Define color codes
 YELLOW='\033[0;33m'  # Yellow
@@ -12,22 +22,10 @@ RED='\033[0;31m'     # Red
 GREEN='\033[0;32m'   # Green
 NC='\033[0m'         # No Color (reset to default)
 
-# Creates a symlink to .zshrc
-if [ -f ~/.zshrc ]; then
-    cp ~/.zshrc ~/.zshrc.bak
-    echo -e ".zshrc backup created in ${YELLOW}~/.zshrv.bak${NC}"
-fi
-    echo "creating symlink to .zshrc..." 
-    ln -sf $(pwd)/.zshrc ~/.zshrc
-
-
-# Creates a symlink to .p10k.zsh
-if [ -f ~/.p10k.zsh ]; then
-    cp ~/.p10k.zsh ~/.p10k.zsh.bak
-    echo -e ".p10k.zsh backup created in ${YELLOW}~/.p10k.zsh.bak${NC}"
-fi  
-    echo "creating symlink to .p10k.zsh..."  
-    ln -sf $(pwd)/.p10k.zsh ~/.p10k.zsh
+# Loop through the array and create symlinks
+for file in "${files[@]}"; do
+    create_symlink "$(pwd)" "$file"
+done
 
 
 # List of files where we want to add the code (in the current directory)

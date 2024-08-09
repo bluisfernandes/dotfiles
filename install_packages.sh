@@ -6,11 +6,12 @@ apt_packages=(
     "ripgrep"  # 'rg' is installed as 'ripgrep'
     "fd-find"  # 'fd' is installed as 'fd-find'
     "neofetch"
+    "tmux"
 )
 cargo_packages=(
     "exa"
     "grex"
-    "dust"
+    "du-dust"
     "bat"
 )
 
