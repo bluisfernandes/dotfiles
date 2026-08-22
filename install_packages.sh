@@ -64,6 +64,12 @@ function check_installed_packages {
 
 # Function to install Cargo packages
 function install_cargo_packages {
+    # Only run update if there are apt packages queued for installation
+    if [ ${#to_install_apt_packages[@]} -gt 0 ]; then
+        echo -e "${YELLOW}Updating package lists...${NC}"
+        sudo apt update
+    fi
+
     for package in "${to_install_cargo_packages[@]}"; do
         echo -e "${YELLOW}Installing $package via Cargo...${NC}"
         cargo install "$package"
