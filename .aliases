@@ -28,7 +28,7 @@ alias b='bash'
 alias aliasb='rg -e ^alias ~/.aliases -N'
 
 # aliases to see this file with cat or bat
-alias aa='bat ~/.bruno_aliases'
+alias aa='bat ~/.aliases'
 
 # alias to virtual enviroment
 alias ac='source ./env/bin/activate'
@@ -36,3 +36,19 @@ alias dea='deactivate'
 
 # Git alias for a graphical log view
 alias glg='git log --graph --all --oneline'
+alias gs='git status'
+alias ga='git add'
+alias gd='git diff'
+
+# gcm='git commit -m "x"'
+expand-gcm() {
+  if [[ $BUFFER == "gcm" ]]; then
+    BUFFER='git commit -m ""'
+    CURSOR=$(( ${#BUFFER} - 1 )) # Posiciona o cursor entre as aspas
+  else
+    zle self-insert
+  fi
+}
+
+zle -N expand-gcm
+bindkey ' ' expand-gcm # Expande ao apertar ESPAÇO após 'gcm'
