@@ -114,10 +114,11 @@ check_installed_packages
 display_packages
 
 # Ask for confirmation to proceed
-read -p "Do you want to proceed? (y/n): " choice
+echo "Do you want to proceed? (y/n): "
+read choice
 if [[ "$choice" != "y" ]]; then
     echo "Installation aborted."
-    exit 1
+    return 1 2>/dev/null || exit 1
 fi
 
 # Install the packages
