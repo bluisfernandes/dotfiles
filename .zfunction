@@ -1,0 +1,125 @@
+# DESC: Criar diretório e já entrar nele
+function mkd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# DESC: Sincronizar cofre do Obsidian com Git automaticamente 
+function os() {
+    local custom_msg="$1"
+    local vault_path="$HOME/project/Obsidian"
+    local has_changes=false
+    
+    # Formatação da mensagem de commit
+    local commit_msg="Backup: $(date +'%Y-%m-%d %H:%M')"
+    if [[ -n "$custom_msg" ]]; then
+        commit_msg="${custom_msg} - ${commit_msg}"
+    fi
+
+    # Cores ANSI
+    local YELLOW='\033[0;33m'
+    local GREEN='\033[0;32m'
+    local RED='\033[0;31m'
+    local NC='\033[0m' # Reset
+
+    echo -e "${YELLOW}Acessando o cofre do Obsidian...${NC}"
+    cd "$vault_path" || { echo -e "${RED}Erro: Diretorio nao encontrado.${NC}"; return 1; }
+
+    # 1. Commit local (se houver alterações)
+    if [[ -n $(git status --porcelain) ]]; then
+        echo -e "${YELLOW}Salvando alteracoes locais...${NC}"
+        git add .
+        
+        if ! git commit -m "$commit_msg"; then
+            echo -e "${RED}Erro: Falha ao criar o commit local.${NC}"
+            cd - > /dev/null || return
+            return 1
+        fi
+        has_changes=true
+    fi
+
+    # 2. Pull com rebase
+    echo -e "${YELLOW}Puxando alteracoes da branch master...${NC}"
+    if ! git pull --rebase origin master; then
+        echo -e "${RED}Erro: Conflito ou falha ao fazer pull. Resolva manualmente.${NC}"
+        cd - > /dev/null || return
+        return 1
+    fi
+
+    # 3. Push apenas se houver alterações locais ou commits para enviar
+    # Verifica se a branch local está à frente da remota
+    if [[ "$has_changes" = true ]] || [[ -n $(git cherry origin/master) ]]; then
+        echo -e "${YELLOW}Enviando para o remoto (master)...${NC}"
+        if ! git push origin master; then
+            echo -e "${RED}Erro: Falha ao enviar alterações (push) para a branch master.${NC}"
+            cd - > /dev/null || return
+            return 1
+        fi
+        echo -e "${GREEN}Anotacoes sincronizadas e enviadas com sucesso! ${NC}"
+    else
+        echo -e "${GREEN}Nenhuma alteracao local ou pendente para enviar. Cofre atualizado! ${NC}"
+    fi
+
+    cd - > /dev/null || return
+}
+
+
+# DESC: Localizar e abrir arquivo rapidamente com fzf e micro
+function fv() {
+    local file
+    file=$(fzf --preview 'bat --color=always {}')
+    if [[ -n "$file" ]]; then
+        micro "$file"
+    fi
+}
+
+# DESC: Conectar rapidamente ao REPL do ESP32 via mpremote
+function esp-repl() {
+    # Busca automaticamente a primeira porta serial disponível (USB ou ACM)
+    local port=$(ls /dev/ttyUSB* /dev/ttyACM* 2>/dev/null | head -n 1)
+    
+    if [[ -z "$port" ]]; then
+        echo "Nenhuma placa conectada encontrada."
+        return 1
+    fi
+    
+    echo "Conectando ao ESP32 na porta $port..."
+    mpremote connect "$port" repl
+}
+
+# DESC: Lista todas as funções definidas no arquivo ~/.zfunctions com suas descrições
+function list-funcs() {
+    echo -e "\e[1;35m=== Minhas Funções (~/.zfunctions) ===\e[0m"
+    awk '
+    /^# DESC:/ { sub(/^# DESC:[ \t]*/, ""); desc = $0 }
+    /^function / {
+        name = $2; gsub(/[(){]/, "", name);
+        if (desc == "") desc = "\e[1;30m(Sem descrição)\e[0m"
+        printf " \033[1;32m❯\033[0m \033[1;36m%-20s\033[0m %s\n", name, desc;
+        desc = ""
+    }' ~/.zfunctions
+}
+
+
+# DESC: Mantem BW entre sessoes
+function bw-login() {
+    # 1. Destrava o Bitwarden e pega o token
+    export BW_SESSION=$(bw unlock --raw)
+    
+    # 2. Salva o token em um arquivo para que outros terminais possam acessá-lo
+    echo "$BW_SESSION" > ~/.bw_token_cache
+    
+    # 3. Mata qualquer timer anterior para não apagar a nova sessão antes da hora
+    pkill -f "sleep.*bw_token_cache" 2>/dev/null
+    
+    # 4. Inicia um timer de 15 minutos (900 segundos) em segundo plano
+    # O comando 'disown' garante que o timer continue rodando mesmo se você fechar este terminal
+    (sleep 900 && rm -f ~/.bw_token_cache && bw lock) >/dev/null 2>&1 & disown
+    
+    echo "Bitwarden destravado. O acesso expirará em 15 minutos."
+}
+
+
+# Carrega a sessão do Bitwarden se o token ainda não tiver expirado (apagado pelo timer)
+if [ -f ~/.bw_token_cache ]; then
+    export BW_SESSION=$(cat ~/.bw_token_cache)
+fi
