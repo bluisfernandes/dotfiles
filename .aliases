@@ -39,6 +39,14 @@ alias glg='git log --graph --all --oneline'
 alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
+alias gc="git commit -m"
+alias lg="lazygit"
+
+# Atalhos de Sistema e Configuração
+alias update="sudo apt update && sudo apt upgrade -y"
+alias reload="source ~/.zshrc"
+alias zshconfig="micro ~/.zshrc"
+alias aliasconfig="micro ~/.aliases"
 
 # gcm='git commit -m "x"'
 expand-gcm() {
@@ -52,3 +60,4 @@ expand-gcm() {
 
 zle -N expand-gcm
 bindkey ' ' expand-gcm # Expande ao apertar ESPAÇO após 'gcm'
+
