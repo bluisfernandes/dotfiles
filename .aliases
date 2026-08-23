@@ -48,6 +48,9 @@ alias reload="source ~/.zshrc"
 alias zshconfig="micro ~/.zshrc"
 alias aliasconfig="micro ~/.aliases"
 
+# Bitwarden alias
+alias bw="flatpak run --command=bw com.bitwarden.desktop"
+
 # gcm='git commit -m "x"'
 expand-gcm() {
   if [[ $BUFFER == "gcm" ]]; then

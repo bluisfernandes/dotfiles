@@ -154,3 +154,5 @@ zle -N _pet_move_cursor_to_next_parameter
 bindkey '^n' _pet_move_cursor_to_next_parameter
 # ----- PET CLI -----
 
+# ----- BITWARDEN ----
+export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
