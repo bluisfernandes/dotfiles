@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Files to be symlinked
-files=(".zshrc" ".aliases" ".tmux.conf" ".p10k.zsh" ".zfunction")
+files=(".zshrc" ".zaliases" ".tmux.conf" ".p10k.zsh" ".zfunctions")
 
 # Function to create a symlink with backup
 create_symlink() {
@@ -39,7 +39,7 @@ code='
 # ----- Start of added section -----
 
 [ -f ~/.zaliases ] && source ~/.zaliases
-[ -f ~/.zfunction ] && source ~/.zfunction
+[ -f ~/.zfunctions ] && source ~/.zfunctions
 
 # ----- End of added section -----
 '
@@ -54,7 +54,7 @@ add_code_to_file() {
     # Check if the file exists
     if [ -f "$file" ]; then
         # Check if the code is already present in the file
-        if ! grep -qF "~/.aliases" "$file"; then
+        if ! grep -qF "~/.zaliases" "$file"; then
             echo "Adding code to $file"
             echo "$code" >> "$file"
         else
