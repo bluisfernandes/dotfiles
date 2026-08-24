@@ -155,3 +155,8 @@ function _pet_move_cursor_to_next_parameter() {
 zle -N _pet_move_cursor_to_next_parameter
 bindkey '^n' _pet_move_cursor_to_next_parameter
 # ----- PET CLI -----
+
+# DESC: Bitwarden\tSalva sessao ativa Bitwarden
+bw-unlock() {
+  export BW_SESSION=$(bw unlock --raw)
+}
