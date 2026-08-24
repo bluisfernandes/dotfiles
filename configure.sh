@@ -23,10 +23,13 @@ GREEN='\033[0;32m'   # Green
 NC='\033[0m'         # No Color (reset to default)
 
 # Loop through the array and create symlinks
-for file in "${files[@]}"; do
-    create_symlink "$(pwd)" "$file"
-done
-
+read -p "Deseja criar os symlinks? (y/N): " reply
+if [[ "$reply" =~ ^[Yy]$ ]]; then
+    # Loop through the array and create symlinks
+    for file in "${files[@]}"; do
+        create_symlink "$(pwd)" "$file"
+    done
+fi
 
 # List of files where we want to add the code (in the current directory)
 files=(
@@ -71,10 +74,12 @@ add_code_to_file() {
 }
 
 # Iterate over the list of files and add the code to each
-for file in "${files[@]}"; do
-    add_code_to_file "$file" "$code"
-done
-
+read -p "Deseja adicionar o 'source' aos arquivos: ${files[*]} ?(y/N): " reply
+if [[ "$reply" =~ ^[Yy]$ ]]; then
+    for file in "${files[@]}"; do
+        add_code_to_file "$file" "$code"
+    done
+fi
 
 # Check the current default shell
 current_shell=$(echo $SHELL)
