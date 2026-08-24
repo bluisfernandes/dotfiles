@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Files to be symlinked
-files=(".zshrc" ".aliases" ".tmux.conf" ".p10k.zsh")
+files=(".zshrc" ".aliases" ".tmux.conf" ".p10k.zsh" ".zfunction")
 
 # Function to create a symlink with backup
 create_symlink() {
@@ -36,11 +36,13 @@ files=(
 
 # Code snippet to be added in files
 code='
-# Start of added section
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
-fi
-# End of added section'
+# ----- Start of added section -----
+
+[ -f ~/.zaliases ] && source ~/.zaliases
+[ -f ~/.zfunction ] && source ~/.zfunction
+
+# ----- End of added section -----
+'
 
 
 
