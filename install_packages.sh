@@ -109,7 +109,9 @@ for pkg in "${TO_INSTALL[@]}"; do
     fi
 done
 
-if command -v zsh &> /dev/null; then
+zsh_path="$(which zsh)"
+
+if command -v zsh &> /dev/null && [ "$SHELL" != "$zsh_path" ]; then
     echo -e "\nConfigurando Zsh como shell padrão..."
     sudo chsh -s "$(which zsh)" "$USER"
     echo "Zsh configurado. Reinicie a sessão para aplicar."
