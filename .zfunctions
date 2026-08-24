@@ -164,3 +164,15 @@ bindkey '^n' _pet_move_cursor_to_next_parameter
 bw-unlock() {
   export BW_SESSION=$(bw unlock --raw)
 }
+
+# DESC: GIT gcm='git commit -m "x"'
+expand-gcm() {
+  if [[ $BUFFER == "gcm" ]]; then
+    BUFFER='git commit -m ""'
+    CURSOR=$(( ${#BUFFER} - 1 )) # Posiciona o cursor entre as aspas
+  else
+    zle self-insert
+  fi
+}
+zle -N expand-gcm
+bindkey ' ' expand-gcm # Expande ao apertar ESPAÇO após 'gcm'
