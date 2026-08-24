@@ -123,37 +123,6 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# ----- PET CLI -----
-function prev() {
-  PREV=$(fc -lrn | head -n 1)
-  sh -c "pet new `printf %q "$PREV"`"
-}
-
-function pet-select() {
- BUFFER=$(pet search --query "$LBUFFER")
- CURSOR=$#BUFFER
- zle redisplay
-}
-zle -N pet-select
-[[ -t 0 ]] && stty -ixon
-bindkey '^s' pet-select
-
-function _pet_move_cursor_to_next_parameter() {
-    match="$(echo "$BUFFER" | perl -nle 'print $& if /<.*?>/')"
-    if [ -n "$match" ]; then
-      default="$(echo "$match" | perl -nle 'print $& if /(?<==).*(?=>)/')"
-      match_len=${#match}
-      default_len=${#default}
-      parameter_offset=${#BUFFER%%$match*}
-
-      CURSOR="$((${parameter_offset} + ${default_len}))"
-      BUFFER="${BUFFER[1,$parameter_offset]}${default}${BUFFER[$parameter_offset+$match_len+1,-1]}"
-    fi
-}
-zle -N _pet_move_cursor_to_next_parameter
-bindkey '^n' _pet_move_cursor_to_next_parameter
-# ----- PET CLI -----
-
 # ----- BITWARDEN ----
 export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
 
