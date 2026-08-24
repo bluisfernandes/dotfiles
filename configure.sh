@@ -7,13 +7,18 @@ files=(".zshrc" ".zaliases" ".tmux.conf" ".p10k.zsh" ".zfunctions")
 create_symlink() {
     local src_dir="$1"
     local file="$2"
+    local target="$HOME/$file"
 
-    if [ -f ~/$file ]; then
-        cp $src_dir/$file ~/$file.bak
-        echo -e "$file backup created in ${YELLOW}~/$file.bak${NC}"
+    if [ -f "$target" ] && [ ! -L "$target" ]; then
+        local timestamp=$(date +%Y%m%d%H%M%S)
+        local backup_file="${target}.bak_${timestamp}"
+        
+        cp "$src_dir/$file" "$backup_file"
+        echo -e "$file backup created in ${YELLOW}$backup_file${NC}"
     fi
+
     echo "creating symlink to $file..." 
-    ln -sf $src_dir/$file ~/$file
+    ln -sf "$src_dir/$file" "$target"
 }
 
 # Define color codes
