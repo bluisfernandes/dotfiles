@@ -88,11 +88,15 @@ function esp-repl() {
 
 # DESC: Lista todas as funções definidas no arquivo ~/.zfunctions com suas descrições
 function list-funcs() {
-    echo -e "\e[1;35m=== Minhas Funções (~/.zfunctions) ===\e[0m"
+    echo -e "\033[1;35m=== Minhas Funções (~/.zfunctions) ===\033[0m"
     awk '
     /^# DESC:/ { sub(/^# DESC:[ \t]*/, ""); desc = $0 }
-    /^function / {
-        name = $2; gsub(/[(){]/, "", name);
+    /^([a-zA-Z0-9_-]+[ \t]*\(\)|function[ \t]+[a-zA-Z0-9_-]+)/ {
+        name = $0;
+        sub(/^function[ \t]+/, "", name);
+        sub(/[ \t]*\(\).*/, "", name);
+        sub(/[ \t]*\{.*/, "", name);
+        
         if (desc == "") desc = "\033[1;30m(Sem descrição)\033[0m"
         printf " \033[1;32m❯\033[0m \033[1;36m%-20s\033[0m %s\n", name, desc;
         desc = ""
