@@ -1,7 +1,14 @@
 #!/bin/bash
 
 # Files to be symlinked
-files=(".zshrc" ".zaliases" ".zfunctions" ".tmux.conf" ".p10k.zsh" ".config/pet/config.toml")
+files=(
+    ".zshrc"
+    ".zaliases"
+    ".zfunctions"
+    ".tmux.conf"
+    ".p10k.zsh"
+    ".config/pet/config.toml"
+    )
 
 # Function to create a symlink with backup
 create_symlink() {
