@@ -156,3 +156,11 @@ bindkey '^n' _pet_move_cursor_to_next_parameter
 
 # ----- BITWARDEN ----
 export XDG_DATA_DIRS="$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
+
+# ----- Start of added section -----
+
+[ -f ~/.zaliases ] && source ~/.zaliases
+[ -f ~/.zfunctions ] && source ~/.zfunctions
+
+# ----- End of added section -----
+
