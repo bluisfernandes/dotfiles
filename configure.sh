@@ -1,24 +1,28 @@
 #!/bin/bash
 
 # Files to be symlinked
-files=(".zshrc" ".zaliases" ".tmux.conf" ".p10k.zsh" ".zfunctions")
+files=(".zshrc" ".zaliases" ".zfunctions" ".tmux.conf" ".p10k.zsh" ".config/pet/config.toml")
 
 # Function to create a symlink with backup
 create_symlink() {
-    local src_dir="$1"
-    local file="$2"
-    local target="$HOME/$file"
+    local src_dir="$1"    # Ex: $(pwd)
+    local rel_path="$2"   # Ex: .config/pet/config.toml
+    local target="$HOME/$rel_path"
 
+    # Garante que a pasta existe
+    mkdir -p "(dirname "$target")"
+
+    # Faz o backup caso exista arquivo original
     if [ -f "$target" ] && [ ! -L "$target" ]; then
         local timestamp=$(date +%Y%m%d%H%M%S)
         local backup_file="${target}.bak_${timestamp}"
-        
-        cp "$src_dir/$file" "$backup_file"
-        echo -e "$file backup created in ${YELLOW}$backup_file${NC}"
+
+        cp "$target" "$backup_file"
+        echo -e "$target backup created in ${YELLOW}$backup_file${NC}"
     fi
 
-    echo "creating symlink to $file..." 
-    ln -sf "$src_dir/$file" "$target"
+    echo "creating symlink to $rel_path..." 
+    ln -sf "$src_dir/$rel_path" "$target"
 }
 
 # Define color codes
