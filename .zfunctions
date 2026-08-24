@@ -104,8 +104,8 @@ function list-funcs() {
 }
 
 
-# DESC: BW destrava 
-function bw-login() {
+# DESC: BW unlock and export token
+function bw-unlock() {
     # 1. Destrava o Bitwarden e salva o token
     export BW_SESSION=$(bw unlock --raw)
 }
