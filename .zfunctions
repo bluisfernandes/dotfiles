@@ -104,29 +104,11 @@ function list-funcs() {
 }
 
 
-# DESC: Mantem BW entre sessoes
+# DESC: BW destrava 
 function bw-login() {
-    # 1. Destrava o Bitwarden e pega o token
+    # 1. Destrava o Bitwarden e salva o token
     export BW_SESSION=$(bw unlock --raw)
-    
-    # 2. Salva o token em um arquivo para que outros terminais possam acessá-lo
-    echo "$BW_SESSION" > ~/.bw_token_cache
-    
-    # 3. Mata qualquer timer anterior para não apagar a nova sessão antes da hora
-    pkill -f "sleep.*bw_token_cache" 2>/dev/null
-    
-    # 4. Inicia um timer de 15 minutos (900 segundos) em segundo plano
-    # O comando 'disown' garante que o timer continue rodando mesmo se você fechar este terminal
-    (sleep 900 && rm -f ~/.bw_token_cache && bw lock) >/dev/null 2>&1 & disown
-    
-    echo "Bitwarden destravado. O acesso expirará em 15 minutos."
 }
-
-
-# Carrega a sessão do Bitwarden se o token ainda não tiver expirado (apagado pelo timer)
-if [ -f ~/.bw_token_cache ]; then
-    export BW_SESSION=$(cat ~/.bw_token_cache)
-fi
 
 
 # ----- PET CLI -----
