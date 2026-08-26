@@ -17,7 +17,7 @@ create_symlink() {
     local target="$HOME/$rel_path"
 
     # Garante que a pasta existe
-    mkdir -p "(dirname "$target")"
+    mkdir -p "$(dirname "$target")"
 
     # Faz o backup caso exista arquivo original
     if [ -f "$target" ] && [ ! -L "$target" ]; then
