@@ -1,20 +1,20 @@
-# Check if `exa` is installed
-if command -v exa >/dev/null 2>&1; then
-    # Aliases for `exa` (a modern replacement for `ls`)
-    alias ls='exa --git'                             # List files with Git information
-    alias la='exa -a'                               # List all files including hidden
-    alias ll='exa -l --group-directories-first --git' # Long format, directories first, Git info
-    alias lla='exa -la --group-directories-first --git' # Long format with hidden files, directories first, Git info
-    alias lt='exa -T --git-ignore --group-directories-first' # Tree view with Git ignore, directories first
-    alias lte='exa -T --git-ignore -I "*env|__pycache__" --group-directories-first' # Tree view with Git ignore, excluding env and __pycache__
-    alias ltd='exa -TD --git-ignore'                # Tree view with Git ignore, directories first, no color
-    alias lr='exa -ls modified --git'               # List modified files with Git info
+# Check if `eza` is installed
+if command -v eza >/dev/null 2>&1; then
+    # Aliases for `eza` (a modern replacement for `ls`)
+    alias ls='eza --git'                             # List files with Git information
+    alias la='eza -a'                               # List all files including hidden
+    alias ll='eza -l --group-directories-first --git' # Long format, directories first, Git info
+    alias lla='eza -la --group-directories-first --git' # Long format with hidden files, directories first, Git info
+    alias lt='eza -T --git-ignore --group-directories-first' # Tree view with Git ignore, directories first
+    alias lte='eza -T --git-ignore -I "*env|__pycache__" --group-directories-first' # Tree view with Git ignore, excluding env and __pycache__
+    alias ltd='eza -TD --git-ignore'                # Tree view with Git ignore, directories first, no color
+    alias lr='eza -ls modified --git'               # List modified files with Git info
 else
     # Define color codes
     YELLOW='\033[0;33m'  # Yellow
     RED='\033[0;31m'     # Red
     NC='\033[0m'         # No Color
-    echo -e "package '${YELLOW}exa${NC}' not found. ${RED}No 'ls' aliases created${NC}."
+    echo -e "package '${YELLOW}eza${NC}' not found. ${RED}No 'ls' aliases created${NC}."
 fi
 
 # alises to grep and ripgrep
@@ -25,10 +25,10 @@ alias z='zsh'
 alias b='bash'
 
 # alias to show all alias from this file:
-alias aliasb='rg -e ^alias ~/.aliases -N'
+alias aliasb='rg -e ^alias ~/.zaliases -N'
 
 # aliases to see this file with cat or bat
-alias aa='bat ~/.aliases'
+alias aa='bat ~/.zaliases'
 
 # alias to virtual enviroment
 alias ac='source ./env/bin/activate'
