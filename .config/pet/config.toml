@@ -13,7 +13,7 @@
   Cmd = []
   Color = true
   Column = 40
-  Editor = "sensible-editor"
+  Editor = "/usr/bin/nano"
   Format = "[$description]: $command $tags"
   SelectCmd = "fzf --ansi --layout=reverse --border --height=91% --pointer=* --cycle --prompt=Snippets:"
   SnippetDirs = []
