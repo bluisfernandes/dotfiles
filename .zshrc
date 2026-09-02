@@ -126,4 +126,5 @@ source $ZSH/oh-my-zsh.sh
 
 # ----- End of added section -----
 
+eval "$(atuin init zsh)"
 export SSH_AUTH_SOCK=/home/bluis/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
