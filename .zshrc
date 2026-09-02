@@ -126,3 +126,4 @@ source $ZSH/oh-my-zsh.sh
 
 # ----- End of added section -----
 
+export SSH_AUTH_SOCK=/home/bluis/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
