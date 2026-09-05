@@ -13,9 +13,9 @@
   Cmd = []
   Color = true
   Column = 40
-  Editor = "/usr/bin/nano"
+  Editor = "micro"
   Format = "[$description]: $command $tags"
-  SelectCmd = "fzf --ansi --layout=reverse --border --height=91% --pointer=* --cycle --prompt=Snippets:"
+  SelectCmd = "fzf --ansi --layout=reverse --border --height=91% --cycle --prompt=Snippets:"
   SnippetDirs = []
   SnippetFile = "~/.config/pet/snippet.toml"
   SortBy = ""

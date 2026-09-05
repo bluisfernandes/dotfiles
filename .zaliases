@@ -21,8 +21,8 @@ fi
 alias grep='grep --color=auto'
 
 # aliases to switch terminals
-alias z='zsh'
-alias b='bash'
+# alias z='zsh'
+# alias b='bash'
 
 # alias to show all alias from this file:
 alias aliasb='rg -e ^alias ~/.zaliases -N'

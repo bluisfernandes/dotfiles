@@ -82,7 +82,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(copyfile aliases zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(copyfile aliases zsh-autosuggestions zsh-syntax-highlighting zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -128,3 +128,14 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(atuin init zsh)"
 export SSH_AUTH_SOCK=/home/bluis/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+eval "$(zoxide init zsh)"
+
+export FZF_DEFAULT_OPTS="--walker-skip=.venv,.git,.pytest_cache,.ruff_cache,__pycache__ \
+  --preview='bat -f {}' \
+  --layout=reverse \
+  --preview-window=hidden \
+  --bind 'alt-up:page-up,alt-down:page-down' \
+  --bind 'shift-up:preview-up,shift-down:preview-down' \
+  --bind 'ctrl-p:toggle-preview' \
+  --bind 'ctrl-e:execute(micro {})' \
+  --bind 'ctrl-y:execute-silent(echo -n {} | wl-copy)'"

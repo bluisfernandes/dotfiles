@@ -6,7 +6,7 @@ function mkd() {
 # DESC: Sincronizar cofre do Obsidian com Git automaticamente 
 function os() {
     local custom_msg="$1"
-    local vault_path="$HOME/project/Obsidian"
+    local vault_path="$HOME/projects/Obsidian"
     local has_changes=false
     
     # Formatação da mensagem de commit
