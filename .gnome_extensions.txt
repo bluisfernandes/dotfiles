@@ -1,0 +1,224 @@
+[Logo-menu]
+hide-forcequit=true
+menu-button-extensions-app='com.mattjakeman.ExtensionManager.desktop'
+menu-button-icon-image=30
+menu-button-icon-size=20
+menu-button-software-center='/usr/bin/flatpak run io.github.kolunmi.Bazaar'
+menu-button-system-monitor='/usr/bin/missioncenter-helper'
+menu-button-terminal='xdg-terminal-exec'
+show-activities-button=true
+show-distroshelf=true
+show-gamemode=false
+show-lockscreen=false
+show-power-option=false
+symbolic-icon=true
+
+[appindicator]
+compact-mode-enabled=true
+icon-brightness=0.0
+icon-contrast=0.0
+icon-opacity=240
+icon-saturation=0.0
+icon-size=0
+legacy-tray-enabled=true
+tray-pos='right'
+
+[blur-my-shell]
+pipelines={'pipeline_default': {'name': <'Default'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000000'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>, 'unscaled_radius': <34>}>}>]>}, 'pipeline_default_rounded': {'name': <'Default rounded'>, 'effects': <[<{'type': <'native_static_gaussian_blur'>, 'id': <'effect_000000000001'>, 'params': <{'radius': <30>, 'brightness': <0.59999999999999998>}>}>, <{'type': <'corner'>, 'id': <'effect_000000000002'>, 'params': <{'radius': <24>}>}>]>}}
+rounded-blur-found=true
+settings-version=2
+
+[blur-my-shell/appfolder]
+brightness=0.59999999999999998
+sigma=30
+
+[blur-my-shell/applications]
+pipeline='pipeline_default'
+
+[blur-my-shell/coverflow-alt-tab]
+pipeline='pipeline_default'
+
+[blur-my-shell/dash-to-dock]
+blur=true
+brightness=0.59999999999999998
+pipeline='pipeline_default_rounded'
+sigma=30
+static-blur=true
+style-dash-to-dock=0
+
+[blur-my-shell/lockscreen]
+pipeline='pipeline_default'
+
+[blur-my-shell/overview]
+pipeline='pipeline_default'
+
+[blur-my-shell/panel]
+brightness=0.59999999999999998
+corner-radius=0
+pipeline='pipeline_default'
+sigma=30
+
+[blur-my-shell/popup]
+blur=false
+pipeline='pipeline_default_rounded'
+
+[blur-my-shell/screenshot]
+pipeline='pipeline_default'
+
+[blur-my-shell/window-list]
+brightness=0.59999999999999998
+sigma=30
+
+[caffeine]
+cli-toggle=false
+countdown-timer=300
+duration-timer=0
+duration-timer-list=[300, 600, 1800]
+indicator-position-max=4
+inhibit-apps=@as []
+user-enabled=false
+
+[dash-to-dock]
+background-opacity=0.80000000000000004
+custom-theme-shrink=false
+dash-max-icon-size=39
+dock-position='BOTTOM'
+height-fraction=0.90000000000000002
+icon-size-fixed=false
+intellihide-mode='FOCUS_APPLICATION_WINDOWS'
+multi-monitor=true
+preferred-monitor=-2
+preferred-monitor-by-connector='eDP-1'
+preview-size-scale=0.20000000000000001
+shortcut-timeout=1.0
+show-mounts-network=true
+show-trash=false
+
+[focus-on-active-window]
+border-color='rgba(198, 70, 0, 1)'
+border-enabled=true
+border-radius=11
+border-use-system-color=false
+border-width=4
+inactive-darkness=0
+inactive-desaturation=0
+inactive-opacity=100
+
+[gsconnect]
+devices=['238bde63539e402faf0d93be6e45cbe3']
+enabled=true
+keep-alive-when-locked=false
+missing-openssl=false
+name='bluefin'
+show-indicators=true
+
+[gsconnect/device/238bde63539e402faf0d93be6e45cbe3]
+certificate-pem='-----BEGIN CERTIFICATE-----\nMIIBjDCCATGgAwIBAgIBATAKBggqhkjOPQQDBDBPMSkwJwYDVQQDDCAyMzhiZGU2\nMzUzOWU0MDJmYWYwZDkzYmU2ZTQ1Y2JlMzEUMBIGA1UECwwLS0RFIENvbm5lY3Qx\nDDAKBgNVBAoMA0tERTAeFw0yNTA4MjYwNTAwMDBaFw0zNjA4MjYwNTAwMDBaME8x\nKTAnBgNVBAMMIDIzOGJkZTYzNTM5ZTQwMmZhZjBkOTNiZTZlNDVjYmUzMRQwEgYD\nVQQLDAtLREUgQ29ubmVjdDEMMAoGA1UECgwDS0RFMFkwEwYHKoZIzj0CAQYIKoZI\nzj0DAQcDQgAEA+sgu3cV/C2df9FutxYICNtvhP5MpfNtXEkrWf9zMO7W/p3LTXCS\nwiJJBTJkw9Ot8c86VVk1Zg8H8PaZajz3zzAKBggqhkjOPQQDBANJADBGAiEAybM3\nAz6DgnXqfm9GDtsMloqZIbYIzDakk444E22RQfcCIQCulDP9tZhoagyk87z/2v3p\niAfbZMEYLlVFueewzuzfvQ==\n-----END CERTIFICATE-----\n'
+disabled-plugins=['contacts', 'mpris']
+incoming-capabilities=['kdeconnect.battery', 'kdeconnect.clipboard', 'kdeconnect.clipboard.connect', 'kdeconnect.contacts.request_all_uids_timestamps', 'kdeconnect.contacts.request_vcards_by_uid', 'kdeconnect.findmyphone.request', 'kdeconnect.mousepad.keyboardstate', 'kdeconnect.mousepad.request', 'kdeconnect.mpris', 'kdeconnect.mpris.request', 'kdeconnect.notification', 'kdeconnect.notification.action', 'kdeconnect.notification.reply', 'kdeconnect.notification.request', 'kdeconnect.ping', 'kdeconnect.runcommand', 'kdeconnect.runcommand.output', 'kdeconnect.sftp.request', 'kdeconnect.share.request', 'kdeconnect.share.request.update', 'kdeconnect.shareinputdevices.request', 'kdeconnect.sms.request', 'kdeconnect.sms.request_attachment', 'kdeconnect.sms.request_conversation', 'kdeconnect.sms.request_conversations', 'kdeconnect.systemvolume', 'kdeconnect.telephony.request_mute']
+keybindings=@a{ss} {}
+last-connection='lan://192.168.1.236:1716'
+name='Pixel 9'
+outgoing-capabilities=['kdeconnect.battery', 'kdeconnect.clipboard', 'kdeconnect.clipboard.connect', 'kdeconnect.connectivity_report', 'kdeconnect.contacts.response_uids_timestamps', 'kdeconnect.contacts.response_vcards', 'kdeconnect.digitizer', 'kdeconnect.digitizer.session', 'kdeconnect.findmyphone.request', 'kdeconnect.mousepad.echo', 'kdeconnect.mousepad.keyboardstate', 'kdeconnect.mousepad.request', 'kdeconnect.mpris', 'kdeconnect.mpris.request', 'kdeconnect.notification', 'kdeconnect.notification.request', 'kdeconnect.ping', 'kdeconnect.presenter', 'kdeconnect.runcommand.request', 'kdeconnect.sftp', 'kdeconnect.share.request', 'kdeconnect.shareinputdevices', 'kdeconnect.sms.attachment_file', 'kdeconnect.sms.messages', 'kdeconnect.systemvolume.request', 'kdeconnect.telephony']
+paired=true
+supported-plugins=['battery', 'clipboard', 'connectivity_report', 'contacts', 'findmyphone', 'mousepad', 'mpris', 'notification', 'ping', 'presenter', 'runcommand', 'sftp', 'share', 'sms', 'systemvolume', 'telephony']
+type='phone'
+
+[gsconnect/device/238bde63539e402faf0d93be6e45cbe3/plugin/battery]
+custom-battery-notification-value=uint32 80
+
+[gsconnect/device/238bde63539e402faf0d93be6e45cbe3/plugin/clipboard]
+receive-content=false
+send-content=false
+
+[gsconnect/device/238bde63539e402faf0d93be6e45cbe3/plugin/mpris]
+share-players=false
+
+[gsconnect/device/238bde63539e402faf0d93be6e45cbe3/plugin/notification]
+applications='{"Power":{"iconName":"","enabled":true},"Clocks":{"iconName":"org.gnome.clocks","enabled":true},"Backups":{"iconName":"org.gnome.DejaDup","enabled":true},"Color Management":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Online Accounts":{"iconName":"org.gnome.goa-daemon-symbolic","enabled":true},"File Roller":{"iconName":"org.gnome.FileRoller","enabled":true},"Impression":{"iconName":"io.gitlab.adhami3310.Impression","enabled":true},"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Disk Usage Analyzer":{"iconName":"org.gnome.baobab","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Disks":{"iconName":"org.gnome.DiskUtility","enabled":true},"Events and Tasks Reminders":{"iconName":"org.gnome.Evolution-alarm-notify","enabled":true},"Zenity":{"iconName":"application-x-executable","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Ghostty":{"iconName":"com.mitchellh.ghostty","enabled":true},"Spotify":{"iconName":"com.spotify.Client","enabled":true},"Goose":{"iconName":"","enabled":true},"Chromium":{"iconName":"file:///tmp/org.chromium.Chromium.scoped_dir.aCkjlc/logo.png","enabled":true}}'
+send-active=false
+send-notifications=false
+
+[gsconnect/device/238bde63539e402faf0d93be6e45cbe3/plugin/share]
+receive-directory='/var/home/bluis/Downloads'
+
+[gsconnect/messaging]
+window-maximized=false
+window-size=(640, 480)
+
+[gsconnect/preferences]
+window-maximized=false
+window-size=(790, 550)
+
+[just-perfection]
+accessibility-menu=false
+activities-button=true
+animation=2
+clock-menu=true
+keyboard-layout=true
+panel=true
+panel-in-overview=true
+quick-settings=true
+quick-settings-airplane-mode=false
+quick-settings-backlight=false
+quick-settings-do-not-disturb=false
+support-notifier-type=0
+weather=false
+world-clock=false
+
+[search-light]
+animation-speed=100.0
+background-color=(0.0, 0.0, 0.0, 0.80000000000000004)
+blur-brightness=0.59999999999999998
+blur-sigma=30.0
+border-color=(0.23000000000000001, 0.23000000000000001, 0.23000000000000001, 1.0)
+border-radius=1.6499999999999999
+border-thickness=1
+entry-font-size=1
+monitor-count=2
+preferred-monitor=0
+scale-height=0.14999999999999999
+scale-width=0.10000000000000001
+shortcut-search=['<Super>space']
+
+[space-bar/appearance]
+application-styles='.space-bar {\n  -natural-hpadding: 12px;\n}\n\n.space-bar-workspace-label.active {\n  margin: 0 4px;\n  background-color: rgba(255,255,255,0.3);\n  color: rgba(255,255,255,1);\n  border-color: rgba(0,0,0,0);\n  font-weight: 700;\n  border-radius: 4px;\n  border-width: 0px;\n  padding: 3px 8px;\n}\n\n.space-bar-workspace-label.inactive {\n  margin: 0 4px;\n  background-color: rgba(0,0,0,0);\n  color: rgba(255,255,255,1);\n  border-color: rgba(0,0,0,0);\n  font-weight: 700;\n  border-radius: 4px;\n  border-width: 0px;\n  padding: 3px 8px;\n}\n\n.space-bar-workspace-label.inactive.empty {\n  margin: 0 4px;\n  background-color: rgba(0,0,0,0);\n  color: rgba(255,255,255,0.5);\n  border-color: rgba(0,0,0,0);\n  font-weight: 700;\n  border-radius: 4px;\n  border-width: 0px;\n  padding: 3px 8px;\n}'
+custom-styles-enabled=false
+custom-styles-failed=false
+
+[space-bar/behavior]
+always-show-numbers=true
+indicator-style='workspaces-bar'
+position='left'
+show-empty-workspaces=false
+smart-workspace-names=true
+toggle-overview=true
+
+[space-bar/shortcuts]
+enable-move-to-workspace-shortcuts=true
+
+[space-bar/state]
+version=39
+
+[switcher]
+activate-by-key=uint32 2
+fade-enable=false
+font-size=uint32 20
+launcher-stats='{"com.mitchellh.ghostty.desktop":2,"com.google.Chrome.desktop":1,"org.chromium.Chromium.desktop":1,"com.mattjakeman.ExtensionManager.desktop":1,"org.gnome.Settings.desktop":1}'
+max-width-percentage=uint32 50
+only-current-workspace=false
+show-switcher=['<Super>space']
+workspace-indicator=true
+
+[tactile]
+col-2=1
+col-3=0
+layout-2-col-2=0
+layout-2-col-3=0
+layout-2-row-1=1
+layout-2-row-2=0
+monitor-0-layout=1
+row-2=0
+
+[window-list]
+show-on-all-monitors=true
