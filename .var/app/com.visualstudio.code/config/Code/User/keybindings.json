@@ -1,0 +1,23 @@
+// Place your key bindings in this file to override the defaults
+[
+{
+    "key": "ctrl+up",
+    "command": "workbench.action.terminal.focusPreviousRecentCommand",
+    "when": "terminalFocus && terminalHasRecentCommands"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "workbench.action.terminal.focusNextRecentCommand",
+    "when": "terminalFocus && terminalHasRecentCommands"
+  },
+  {
+    "key": "ctrl+shift+up",
+    "command": "workbench.action.terminal.scrollUp",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+down",
+    "command": "workbench.action.terminal.scrollDown",
+    "when": "terminalFocus"
+  }
+]

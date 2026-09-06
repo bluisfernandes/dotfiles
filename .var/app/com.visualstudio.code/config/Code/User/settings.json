@@ -1,0 +1,37 @@
+{
+  "terminal.integrated.profiles.linux": {
+    "Zsh": {
+      "path": "host-spawn",
+      "args": ["zsh"],
+      "icon": "terminal",           // Ícone na aba (ex: "terminal", "code", "rocket")
+      "color": "terminal.ansiCyan", 
+      "overrideName": true 
+    },
+
+
+    "Bash-Sandbox": {
+      "path": "/bin/bash",
+      "icon": "terminal-bash",           // Ícone na aba (ex: "terminal", "code", "rocket")
+      "color": "terminal.ansiGreen",     // Cor do ícone na aba
+      "overrideName": true,              // Impede que o terminal mude de nome dinamicamente
+      "env": {
+        "MINHA_VARIAVEL": "valor"        // Variáveis de ambiente exclusivas deste perfil
+      }
+    },
+    "Bash-Host": {
+      "path": "host-spawn",
+      "args": ["bash"],
+      "icon": "terminal-bash",           // Ícone na aba (ex: "terminal", "code", "rocket")
+      "color": "terminal.ansiBlue" ,    // Cor do ícone na aba
+      "overrideName": true  
+    }
+  },
+  
+  "terminal.integrated.defaultProfile.linux": "Zsh",
+  "editor.mouseWheelZoom": true,
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "chat.viewSessions.orientation": "stacked",
+  "editor.fontFamily": "'MesloLGS NF'",
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.enableImages": true
+}
