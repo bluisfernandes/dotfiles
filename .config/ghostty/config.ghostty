@@ -50,26 +50,50 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
+
+# ZSH como padrao
 command = /bin/zsh
+
+# Escurece o conteúdo e o fundo dos splits inativos
+unfocused-split-opacity = 0.5
+
+# Define a cor de fundo do painel inativo para dar contraste total ao focado
+unfocused-split-fill = #11111b
+
 # Aparência e Fonte
-theme = catppuccin-mocha      
-font-size = 12                
+theme = "Catppuccin Mocha"
+font-size = 12
+font-family = "MesloLGS NF"
 
 # Estilo da Janela
-background-opacity = 0.95     
-window-padding-x = 10         
-window-padding-y = 10         
-window-decoration = true    
+background-opacity = 0.95
+window-padding-x = 10
+window-padding-y = 10
+window-decoration = true
 
 # Comportamento
 mouse-hide-while-typing = true
-clipboard-read = allow    
+clipboard-read = allow
 clipboard-write = allow
 
-font-family = "MesloLGS NF"
-theme = Monokai Remastered
-
+# Scroll page
 keybind = ctrl+shift+up=scroll_page_lines:-3
 keybind = ctrl+shift+down=scroll_page_lines:3
 keybind = ctrl+up=jump_to_prompt:-1
 keybind = ctrl+down=jump_to_prompt:1
+
+# Redimensionar splits
+keybind = super+ctrl+shift+down=resize_split:down,10
+keybind = super+ctrl+shift+left=resize_split:left,10
+keybind = super+ctrl+shift+right=resize_split:right,10
+keybind = super+ctrl+shift+up=resize_split:up,10
+
+# Criar novos splits
+keybind = ctrl+super+space=new_split:down
+keybind = ctrl+super+enter=new_split:right
+
+# Navegar entre splits
+keybind = ctrl+super+down=goto_split:down
+keybind = ctrl+super+left=goto_split:left
+keybind = ctrl+super+right=goto_split:right
+keybind = ctrl+super+up=goto_split:up
