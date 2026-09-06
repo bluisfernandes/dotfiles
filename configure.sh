@@ -10,6 +10,7 @@ files=(
     ".config/pet/config.toml"
     ".var/app/com.visualstudio.code/config/Code/User/settings.json"
     ".var/app/com.visualstudio.code/config/Code/User/keybindings.json"
+    ".config/ghostty/config.ghostty"
     )
 
 # Function to create a symlink with backup
