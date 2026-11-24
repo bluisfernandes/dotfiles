@@ -20,6 +20,15 @@ CUSTOM_CMDS=(
     ["shell-gpt"]="uv tool install shell-gpt"
 )
 
+# Repositórios git instalados dentro do Oh My Zsh: "url|caminho relativo a \$ZSH_CUSTOM"
+ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+declare -A REPOS
+REPOS=(
+    ["powerlevel10k"]="https://github.com/romkatv/powerlevel10k.git|themes/powerlevel10k"
+    ["zsh-autosuggestions"]="https://github.com/zsh-users/zsh-autosuggestions|plugins/zsh-autosuggestions"
+    ["zsh-syntax-highlighting"]="https://github.com/zsh-users/zsh-syntax-highlighting.git|plugins/zsh-syntax-highlighting"
+)
+
 # Define color codes
 YELLOW='\033[0;33m'  # Yellow
 RED='\033[0;31m'     # Red
@@ -37,6 +46,16 @@ AVAILABLE=()
 INSTALLED=()
 
 check_install() {
+    # oh-my-zsh não é um comando: verifica a pasta de instalação
+    if [ "$1" = "oh-my-zsh" ]; then
+        if [ -d "$HOME/.oh-my-zsh" ]; then
+            INSTALLED+=("$1")
+        else
+            AVAILABLE+=("$1")
+        fi
+        return
+    fi
+
     if command -v "$1" &> /dev/null || dpkg -l | grep -q -w "^ii  $1 " 2>/dev/null; then
         INSTALLED+=("$1")
     else
@@ -44,7 +63,7 @@ check_install() {
     fi
 }
 
-for pkg in "${APT_PKGS[@]}" "${CARGO_PKGS[@]}" "${!CUSTOM_CMDS[@]}"; do 
+for pkg in "${APT_PKGS[@]}" "${CARGO_PKGS[@]}" "${!CUSTOM_CMDS[@]}"; do
     check_install "$pkg"
 done
 
@@ -53,6 +72,16 @@ for pkg in "${FLATPAK_PKGS[@]}"; do
         INSTALLED+=("$pkg")
     else 
         AVAILABLE+=("$pkg")
+    fi
+done
+
+# Repositórios por último (dependem do oh-my-zsh já instalado)
+for name in "${!REPOS[@]}"; do
+    dest="$ZSH_CUSTOM_DIR/${REPOS[$name]#*|}"
+    if [ -d "$dest" ]; then
+        INSTALLED+=("$name")
+    else
+        AVAILABLE+=("$name")
     fi
 done
 
@@ -106,6 +135,15 @@ for pkg in "${TO_INSTALL[@]}"; do
         flatpak install -y flathub "$pkg"
     elif [[ -n "${CUSTOM_CMDS[$pkg]}" ]]; then
         eval "${CUSTOM_CMDS[$pkg]}"
+    elif [[ -n "${REPOS[$pkg]}" ]]; then
+        if [ ! -d "$HOME/.oh-my-zsh" ]; then
+            echo "oh-my-zsh não está instalado; pulando $pkg. Instale o oh-my-zsh primeiro."
+            continue
+        fi
+        url="${REPOS[$pkg]%%|*}"
+        dest="$ZSH_CUSTOM_DIR/${REPOS[$pkg]#*|}"
+        mkdir -p "$(dirname "$dest")"
+        git clone --depth=1 "$url" "$dest"
     fi
 done
 
